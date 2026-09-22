@@ -1,0 +1,39 @@
+import { createServerClient } from "@supabase/ssr";
+import { type NextRequest, NextResponse } from 'next/server'
+
+
+export default async function updateSession(request: NextRequest) {
+    const response = NextResponse.next({request: {headers: request.headers}})
+    const supabase = createServerClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+        {
+            cookies : {
+                getAll(){
+                    return request.cookies.getAll().map(({name, value}) => ({name, value}))
+                },
+                setAll(cookies){
+                    cookies.forEach(({name, value, options}) => {
+                        response.cookies.set(name, value, options)
+                    })
+                }
+            }
+        }
+    )
+
+    const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const isProtectedPath = 
+    request.nextUrl.pathname.startsWith('/dashboard') ||
+    request.nextUrl.pathname.startsWith('/onboarding');
+
+
+  // If trying to access protected path without user, redirect to login
+  if (!user && isProtectedPath) {
+    const url = request.nextUrl.clone();
+    url.pathname = '/client-portal/login';
+    return NextResponse.redirect(url);
+  }
+
+    return response
+}
