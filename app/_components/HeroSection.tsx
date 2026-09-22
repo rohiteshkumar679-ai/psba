@@ -77,7 +77,7 @@ export default function HeroSection() {
 
       <div className="mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
         {/* Hero copy */}
-        <div className="mx-auto flex max-w-5xl flex-col items-center pb-16 pt-20 text-center sm:pb-20 sm:pt-28 lg:pb-24 lg:pt-32">
+        <div className="mx-auto flex max-w-5xl flex-col items-center pb-16 pt-10 text-center sm:pb-20 sm:pt-28 lg:pb-24 lg:pt-22">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
@@ -106,7 +106,7 @@ export default function HeroSection() {
               delay: 0.08,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="max-w-4xl text-balance text-[2.75rem] font-semibold leading-[1.04] tracking-[-0.045em] text-[#0A2138] sm:text-6xl lg:text-[4.75rem]"
+            className="max-w-4xl text-balance text-[2.75rem] font-semibold leading-[1.04] tracking-[-0.045em] text-[#0A2138] sm:text-6xl lg:text-[3.75rem]"
           >
             Clarity for your numbers.
             <span className="block bg-gradient-to-r from-[#1B666B] via-[#297D80] to-[#AA8E42] bg-clip-text text-transparent">
